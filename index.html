@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>JS Playground (v1.0)</title>
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"
+            integrity="sha512-ZG31AN9z/CQD1YDDAK4RUAvogwbJHv6bHrumrnMLzdCrVu4HeAqrUX7Jsal/cbUwXGfaMUNmQU04tQ8XXl5Znw=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+        <script src="https://cdn.jsdelivr.net/npm/emmet-monaco-es@5.6.1/dist/emmet-monaco.min.js"></script>
+        <script type="module" src="js/script.js" defer></script>
+    </head>
+    <body class="minimalist">
+        <div class="app">
+            <div class="topbar">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 -960 960 960"
+                >
+                    <path
+                        d="M40-120v-80h42l35-525q2-32 25-53.5t55-21.5h245q32 0 55 21.5t25 53.5l36 525h162v-246q-52-14-86-56t-34-98q0-34 13-63.5t36-51.5q-5-11-7-22t-2-23q0-50 35-85t85-35q50 0 85 35t35 85q0 12-2 23t-7 22q23 22 36 51.5t13 63.5q0 56-34 98t-86 56v246h120v80H40Zm123-80h314l-35-520h-32v360h30v80H200v-80h30v-360h-32l-35 520Zm127-160h60v-360h-60v360Zm470-160q33 0 56.5-23.5T840-600q0-28-13-43t-27-29v-88q0-17-11.5-28.5T760-800q-17 0-28.5 11.5T720-760v88q-14 14-27 29t-13 43q0 33 23.5 56.5T760-520Zm0-80Z"
+                    />
+                </svg>
+                <h1>JS Playground <span>v1.0</span></h1>
+                <div class="button-group right">
+                    <div
+                        id="new-project-button"
+                        class="button"
+                        title="New project"
+                    >
+                        <svg
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M21 8V20.9932C21 21.5501 20.5552 22 20.0066 22H3.9934C3.44495 22 3 21.556 3 21.0082V2.9918C3 2.45531 3.4487 2 4.00221 2H14.9968L21 8ZM19 9H14V4H5V20H19V9Z"
+                            ></path>
+                        </svg>
+                    </div>
+                    <div class="divider"></div>
+                    <div
+                        id="open-project-button"
+                        class="button"
+                        title="Open project (Ctrl+O)"
+                    >
+                        <svg
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M3 21C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5H20C20.5523 5 21 5.44772 21 6V9H19V7H11.5858L9.58579 5H4V16.998L5.5 11H22.5L20.1894 20.2425C20.0781 20.6877 19.6781 21 19.2192 21H3ZM19.9384 13H7.06155L5.56155 19H18.4384L19.9384 13Z"
+                            ></path>
+                        </svg>
+                    </div>
+                    <div
+                        id="save-project-button"
+                        class="button"
+                        title="Save project (Ctrl+S)"
+                    >
+                        <svg
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M7 19V13H17V19H19V7.82843L16.1716 5H5V19H7ZM4 3H17L21 7V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V4C3 3.44772 3.44772 3 4 3ZM9 15V19H15V15H9Z"
+                            ></path>
+                        </svg>
+                    </div>
+                    <div class="divider"></div>
+                    <div
+                        class="button"
+                        id="toggle-mode-button"
+                        title="Toggle mode"
+                    >
+                        <svg
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M17.5858 5H14V3H21V10H19V6.41421L14.7071 10.7071L13.2929 9.29289L17.5858 5ZM3 14H5V17.5858L9.29289 13.2929L10.7071 14.7071L6.41421 19H10V21H3V14Z"
+                            ></path>
+                        </svg>
+                    </div>
+                </div>
+                <div id="title-span">Untitled</div>
+            </div>
+            <div class="body">
+                <div class="leftbar">
+                    <iframe id="preview"></iframe>
+                </div>
+                <div class="rightbar">
+                    <ul class="code tabs">
+                        <li id="html-button" class="html active">
+                            <svg
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M12 18.1778L16.6192 16.9222L17.2434 10.1444H9.02648L8.82219 7.88889H17.4477L17.6747 5.67778H6.32535L6.96091 12.3556H14.7806L14.5195 15.2222L12 15.8889L9.48045 15.2222L9.32156 13.3778H7.0517L7.38083 16.9222L12 18.1778ZM3 2H21L19.377 20L12 22L4.62295 20L3 2Z"
+                                ></path>
+                            </svg>
+                            <span>HTML</span>
+                        </li>
+                        <li id="css-button" class="css">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    d="M 3 2 L 5 20 L 11.992188 22 L 19 20 L 21 2 Z M 16.726563 10.347656 L 16.34375 16.589844 L 12.027344 18 L 7.710938 16.589844 L 7.546875 13.605469 L 9.734375 13.605469 L 9.789063 14.960938 L 12.027344 15.722656 L 14.269531 14.960938 L 14.433594 12.519531 L 9.625 12.519531 L 9.515625 10.347656 L 14.539063 10.347656 L 14.703125 8.175781 L 7.164063 8.175781 L 7 6.007813 L 17 6.007813 Z"
+                                ></path>
+                            </svg>
+                            <span>CSS</span>
+                        </li>
+                        <li id="js-button" class="js">
+                            <svg
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M6 3C4.34315 3 3 4.34315 3 6V18C3 19.6569 4.34315 21 6 21H18C19.6569 21 21 19.6569 21 18V6C21 4.34315 19.6569 3 18 3H6ZM13.3344 16.055C14.0531 16.6343 14.7717 16.9203 15.4904 16.913C15.9304 16.913 16.2677 16.8323 16.5024 16.671C16.7297 16.517 16.8434 16.297 16.8434 16.011C16.8434 15.7177 16.7297 15.4683 16.5024 15.263C16.2677 15.0577 15.8241 14.8523 15.1714 14.647C14.3867 14.4197 13.7817 14.1263 13.3564 13.767C12.9384 13.4077 12.7257 12.9053 12.7184 12.26C12.7184 11.6513 12.9824 11.1417 13.5104 10.731C14.0237 10.3203 14.6801 10.115 15.4794 10.115C16.5941 10.115 17.4887 10.3863 18.1634 10.929L17.3934 12.128C17.1221 11.9153 16.8104 11.7613 16.4584 11.666C16.1064 11.556 15.7911 11.501 15.5124 11.501C15.1311 11.501 14.8267 11.5707 14.5994 11.71C14.3721 11.8493 14.2584 12.0327 14.2584 12.26C14.2584 12.5093 14.3977 12.722 14.6764 12.898C14.9551 13.0667 15.4317 13.2537 16.1064 13.459C16.9204 13.701 17.4997 14.0237 17.8444 14.427C18.1891 14.8303 18.3614 15.3437 18.3614 15.967C18.3614 16.605 18.1157 17.155 17.6244 17.617C17.1404 18.0717 16.4364 18.31 15.5124 18.332C14.3024 18.332 13.2904 17.969 12.4764 17.243L13.3344 16.055ZM7.80405 16.693C8.03872 16.8397 8.32105 16.913 8.65105 16.913C8.99572 16.913 9.28172 16.814 9.50905 16.616C9.73639 16.4107 9.85005 16.055 9.85005 15.549V10.247H11.3351V15.835C11.3131 16.7003 11.0637 17.3237 10.5871 17.705C10.3157 17.9323 10.0187 18.0937 9.69605 18.189C9.37339 18.2843 9.06172 18.332 8.76105 18.332C8.21105 18.332 7.72339 18.2367 7.29805 18.046C6.84339 17.8407 6.46205 17.4777 6.15405 16.957L7.18805 16.11C7.37872 16.3667 7.58405 16.561 7.80405 16.693Z"
+                                ></path>
+                            </svg>
+                            <span>JavaScript</span>
+                        </li>
+                        <div class="button-group right">
+                            <div
+                                id="play-button"
+                                class="button"
+                                title="Run code (Ctrl+Enter)"
+                            >
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M8 18.3915V5.60846L18.2264 12L8 18.3915ZM6 3.80421V20.1957C6 20.9812 6.86395 21.46 7.53 21.0437L20.6432 12.848C21.2699 12.4563 21.2699 11.5436 20.6432 11.152L7.53 2.95621C6.86395 2.53993 6 3.01878 6 3.80421Z"
+                                    ></path>
+                                </svg>
+                            </div>
+                            <div
+                                id="download-button"
+                                class="button"
+                                title="Export project (Ctrl+E)"
+                            >
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M13 10H18L12 16L6 10H11V3H13V10ZM4 19H20V12H22V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V12H4V19Z"
+                                    ></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </ul>
+                    <div id="html-editor" class="editor"></div>
+                    <div id="css-editor" class="editor hide"></div>
+                    <div id="js-editor" class="editor hide"></div>
+                    <ul class="tabs">
+                        <li id="console-tab-button">
+                            <svg
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M3 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3ZM4 5V19H20V5H4ZM12 15H18V17H12V15ZM8.66685 12L5.83842 9.17157L7.25264 7.75736L11.4953 12L7.25264 16.2426L5.83842 14.8284L8.66685 12Z"
+                                ></path>
+                            </svg>
+                            <span>Console</span>
+                        </li>
+                        <div id="console-actions" class="button-group right">
+                            <div
+                                id="clear-console-button"
+                                class="button"
+                                title="Clear console"
+                            >
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M17 6H22V8H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V8H2V6H7V3C7 2.44772 7.44772 2 8 2H16C16.5523 2 17 2.44772 17 3V6ZM18 8H6V20H18V8ZM9 4V6H15V4H9Z"
+                                    ></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </ul>
+                    <div id="output" class="console"></div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <span
+                >Developed by
+                <a href="https://github.com/0mrtshn" target="_blank"
+                    >Murat Şahin</a
+                ></span
+            >
+        </footer>
+    </body>
+</html>
