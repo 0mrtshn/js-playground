@@ -1,5 +1,7 @@
 # JS Playground
 
+[https://0mrtshn.github.io/js-playground/](https://0mrtshn.github.io/js-playground/)
+
 JS Playground is an editor that allows you to write and run HTML, CSS, and JavaScript code directly in the browser.
 
 <video src="./screenshoots/video.mp4" controls></video>
@@ -26,3 +28,4 @@ JS Playground is designed for quickly testing and experimenting with HTML, CSS, 
 ## License
 
 MIT
+
